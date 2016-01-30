@@ -11,6 +11,7 @@ public class BasicServer {
 	private static PrintWriter targetWriter;
 	private static BufferedReader targetReader;
 	private static String inputLine;
+	private final static String killCode = "Terminate Process";
 
 	private static void serverInit(int initPortNumber) {
 		// Init
@@ -40,10 +41,12 @@ public class BasicServer {
 		}
 	}
 	private static void serveClient() {
-		// Serve to client
+		// Prints every line of text output sent by client
 		try {
-			while ((inputLine = targetReader.readLine()) != null) {
-				System.out.println(inputLine);
+			while ((inputLine = targetReader.readLine()) != killCode) { // need to make killcode terminate loop
+				if (inputLine != null) {
+					System.out.println(inputLine);
+				}
 			}
 		}
 		catch (IOException ex) {
@@ -58,6 +61,5 @@ public class BasicServer {
 		// Serve to client
 		serveClient();
 		// Test
-		System.out.println(0);
 	}
 }

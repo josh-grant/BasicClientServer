@@ -10,6 +10,7 @@ public class BasicClient {
 	private static Socket targetSocket;
 	private static PrintWriter targetWriter;
 	private static BufferedReader targetReader;
+	private final static String killCode = "Terminate Process";
 
 	private static void clientInit(String initHostName, int initPortNumber) {
 		// Init
@@ -33,6 +34,9 @@ public class BasicClient {
 		// Init
 		clientInit(args[0], Integer.parseInt(args[1]));
 		// Main Loop
-		System.out.println(0);
+		targetWriter.println(1);
+		targetWriter.println(2);
+		targetWriter.println(killCode);
+		targetWriter.println(3);
 	}
 }
