@@ -10,6 +10,7 @@ public class BasicServer {
 	private static Socket targetSocket;
 	private static PrintWriter targetWriter;
 	private static BufferedReader targetReader;
+	private static String inputLine;
 
 	private static void serverInit(int initPortNumber) {
 		// Init
@@ -30,6 +31,20 @@ public class BasicServer {
 		try {
 			targetSocket = serverSocket.accept();
 			System.out.println("Connected to client");
+			targetWriter = new PrintWriter(targetSocket.getOutputStream());
+			targetReader = new BufferedReader(
+				new InputStreamReader(targetSocket.getInputStream()));
+		}
+		catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+	private static void serveClient() {
+		// Serve to client
+		try {
+			while ((inputLine = targetReader.readLine()) != null) {
+				System.out.println(inputLine);
+			}
 		}
 		catch (IOException ex) {
 			ex.printStackTrace();
@@ -40,7 +55,9 @@ public class BasicServer {
 		serverInit(Integer.parseInt(args[0]));
 		// Find & Connect w/Client
 		openConnection();
-		// Main Loop
+		// Serve to client
+		serveClient();
+		// Test
 		System.out.println(0);
 	}
 }
