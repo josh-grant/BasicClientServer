@@ -17,10 +17,14 @@ public class BasicClient {
 		portNumber = Integer.parseInt(args[1]);
 		// IO Init
 		try {
+			System.out.println(0);
 			targetSocket = new Socket(hostName, portNumber);
+			System.out.println(1);
 			targetWriter = new PrintWriter(targetSocket.getOutputStream());
+			System.out.println(2);
 			targetReader = new BufferedReader(
 			new InputStreamReader(targetSocket.getInputStream()));
+			System.out.println(4);
 		}
 		catch (IOException ex) {
 			ex.printStackTrace();
