@@ -11,28 +11,27 @@ public class BasicClient {
 	private static PrintWriter targetWriter;
 	private static BufferedReader targetReader;
 
-	public static void main(String[] args) {
+	private static void clientInit(String initHostName, int initPortNumber) {
 		// Init
-		hostName = args[0];
-		portNumber = Integer.parseInt(args[1]);
+		System.out.println("Initialising client");
+		hostName = initHostName;
+		portNumber = initPortNumber;
 		// IO Init
 		try {
-			System.out.println(0);
+			System.out.println("Initialising socket connection");
 			targetSocket = new Socket(hostName, portNumber);
-			System.out.println(1);
+			System.out.println("Connected to server");
 			targetWriter = new PrintWriter(targetSocket.getOutputStream(), true);
-			targetWriter.println("Test 1");
-			targetWriter.println("Test 2");
-			/*
-			System.out.println(2);
 			targetReader = new BufferedReader(
 			new InputStreamReader(targetSocket.getInputStream()));
-			System.out.println(4);
-			*/
 		}
 		catch (IOException ex) {
 			ex.printStackTrace();
 		}
+	}
+	public static void main(String[] args) {
+		// Init
+		clientInit(args[0], Integer.parseInt(args[1]));
 		// Main Loop
 		System.out.println(0);
 	}
