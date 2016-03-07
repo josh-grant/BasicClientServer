@@ -1,4 +1,9 @@
 // file: BasicServer.java
+//
+// author: Josh Grant 2016
+//
+// Lightweight simple server
+// Listens to socket and prints from stream
 
 import java.net.*;
 import java.io.*;
@@ -8,7 +13,6 @@ public class BasicServer {
 	private static int portNumber;
 	private static ServerSocket serverSocket;
 	private static Socket targetSocket;
-	private static PrintWriter targetWriter;
 	private static BufferedReader targetReader;
 	private static String inputLine;
 
@@ -31,7 +35,6 @@ public class BasicServer {
 		try {
 			targetSocket = serverSocket.accept();
 			System.out.println("Connected to client");
-			targetWriter = new PrintWriter(targetSocket.getOutputStream());
 			targetReader = new BufferedReader(
 				new InputStreamReader(targetSocket.getInputStream()));
 		}

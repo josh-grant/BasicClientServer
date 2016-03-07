@@ -1,4 +1,8 @@
 // file: BasicClient.java
+//
+// author: Josh Grant 2016
+//
+// Lightweight client which streams input to socket
 
 import java.net.Socket;
 import java.io.*;
@@ -9,9 +13,8 @@ public class BasicClient {
 	private static int portNumber;
 	private static Socket targetSocket;
 	private static PrintWriter targetWriter;
-	private static BufferedReader targetReader;
 	private static Console inputScanner;
-	private static String inputLine;
+	private static String outputLine;
 
 	private static void clientInit(String initHostName, int initPortNumber) {
 		// Init
@@ -25,8 +28,6 @@ public class BasicClient {
 			System.out.println("Connected to server");
 			System.out.println("");
 			targetWriter = new PrintWriter(targetSocket.getOutputStream(), true);
-			targetReader = new BufferedReader(
-			new InputStreamReader(targetSocket.getInputStream()));
 			inputScanner = System.console();
 		}
 		catch (IOException ex) {
@@ -45,15 +46,15 @@ public class BasicClient {
 	}
 	private static void inputScanner() {
 		while (true) {
-			inputLine = inputScanner.readLine(">>");
-			if (inputLine.equals("exit()") || inputLine.equals("quit()")) {
+			outputLine = inputScanner.readLine(">>");
+			if (outputLine.equals("exit()") || outputLine.equals("quit()")) {
 				System.out.println("Termination session");
 				clientDisconnect();
 				System.out.println("Session terminated");
 				break;
 			}
-			if (inputLine != null) {
-				targetWriter.println(inputLine);
+			if (outputLine != null) {
+				targetWriter.println(outputLine);
 			}
 		}
 	}
