@@ -37,7 +37,6 @@ public class BasicClient {
 	private static void clientDisconnect() {
 		try {
 			targetWriter.println("Session terminated");
-			targetWriter.println("");
 			targetSocket.close();
 		}
 		catch (IOException ex) {
@@ -48,7 +47,7 @@ public class BasicClient {
 		while (true) {
 			outputLine = inputScanner.readLine(">>");
 			if (outputLine.equals("exit()") || outputLine.equals("quit()")) {
-				System.out.println("Termination session");
+				System.out.println("Terminating session");
 				clientDisconnect();
 				System.out.println("Session terminated");
 				break;
