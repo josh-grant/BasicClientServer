@@ -1,2 +1,2 @@
 # BasicClientServer
-Basic Client/Server Setup in Java
+Basic Client/Server Setup in Java.
